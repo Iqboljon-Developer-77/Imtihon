@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+    <title>{% block title %} Detail page {% endblock %}</title>
+
+{% block content %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ computer.title }}</title>
+</head>
+<body>
+<h1>Name: {{ computer.title }}</h1>
+<img src="{{ computer.image.url }}" height="200px" alt="Rasm"> <br><br>
+<h4>Description: {{ computer.description }}</h4>
+<h4>Price: {{ computer.price }}</h4>
+</body>
+<a href="{% url 'products:computer-delete' computer.pk %}" >Delete</a>
+<h2>Reviews</h2>
+<a href="{% url 'products:add-review' computer.pk %}" >Add Review</a>
+{% for review in reviews %}
+    <h4>{{ review.user.username }} | {{ review.star_given }}</h4>
+    {% if request.user == review.user %}
+        <a href="{% url 'products:edit-review' review.pk %}">Update</a>
+        <a href="#">Delete</a>
+    {% endif %}
+    <p>{{ review.comment }}</p><hr>
+    
+{% endfor %}
+{% endblock content %}
+

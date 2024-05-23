@@ -1,0 +1,15 @@
+
+<form method="post">{% csrf_token %}
+
+
+
+
+<p>Are you sure you want to delete "{{ computer }}"?</p>
+
+
+
+
+    <input type="submit" value="Confirm">
+</form>
+
+<a href="{% url 'products:computer-detail' computer.pk  %}">No</a>
